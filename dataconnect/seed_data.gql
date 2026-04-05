@@ -1,0 +1,117 @@
+mutation CreateDemoData @transaction @auth(level: PUBLIC, insecureReason: "This operation is for seeding the database with demo data and should be accessible publicly.") {
+  user_insertMany(data: [
+    {
+      id: "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11",
+      username: "john_doe",
+      email: "john.doe@example.com",
+      passwordHash: "hashedpassword1",
+      displayName: "John Doe",
+      bio: "An aspiring photographer.",
+      profilePictureUrl: "https://example.com/john.jpg",
+      createdAt: "2023-01-01T10:00:00Z"
+    },
+    {
+      id: "b1f0e132-5a3d-4c70-9f2d-8e4d1b7f0e33",
+      username: "jane_smith",
+      email: "jane.smith@example.com",
+      passwordHash: "hashedpassword2",
+      displayName: "Jane Smith",
+      bio: "Travel enthusiast and blogger.",
+      profilePictureUrl: "https://example.com/jane.jpg",
+      createdAt: "2023-01-02T11:00:00Z"
+    },
+    {
+      id: "c2d1f243-6b4e-5d81-a03e-9f5e2c8g1f44",
+      username: "peter_jones",
+      email: "peter.jones@example.com",
+      passwordHash: "hashedpassword3",
+      displayName: "Peter Jones",
+      bio: "Tech guru and gamer.",
+      profilePictureUrl: "https://example.com/peter.jpg",
+      createdAt: "2023-01-03T12:00:00Z"
+    }
+  ])
+  post_insertMany(data: [
+    {
+      id: "d3e2g354-7c5f-6e92-b14f-0g6f3d9h2g55",
+      authorId: "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11",
+      mediaUrl: "https://example.com/mountains.jpg",
+      mediaType: "image",
+      caption: "Beautiful mountain view!",
+      location: "Rocky Mountains",
+      createdAt: "2023-01-05T14:30:00Z"
+    },
+    {
+      id: "e4f3h465-8d6g-7f03-c25g-1h7g4e0i3h66",
+      authorId: "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11",
+      mediaUrl: "https://example.com/sunset.mp4",
+      mediaType: "video",
+      caption: "Gorgeous sunset over the ocean.",
+      location: "Malibu Beach",
+      createdAt: "2023-01-06T18:00:00Z"
+    },
+    {
+      id: "f5g4i576-9e7h-8g14-d36h-2i8h5f1j4i77",
+      authorId: "b1f0e132-5a3d-4c70-9f2d-8e4d1b7f0e33",
+      mediaUrl: "https://example.com/paris.jpg",
+      mediaType: "image",
+      caption: "Eiffel Tower at night!",
+      location: "Paris, France",
+      createdAt: "2023-01-07T20:00:00Z"
+    },
+    {
+      id: "g6h5j687-0f8i-9h25-e47i-3j9i6g2k5j88",
+      authorId: "c2d1f243-6b4e-5d81-a03e-9f5e2c8g1f44",
+      mediaUrl: "https://example.com/coding.jpg",
+      mediaType: "image",
+      caption: "Late night coding session.",
+      location: "Home Office",
+      createdAt: "2023-01-08T22:00:00Z"
+    }
+  ])
+  comment_insertMany(data: [
+    {
+      id: "h7i6k798-1g9j-0i36-f58j-4k0j7h3l6k99",
+      authorId: "b1f0e132-5a3d-4c70-9f2d-8e4d1b7f0e33",
+      postId: "d3e2g354-7c5f-6e92-b14f-0g6f3d9h2g55",
+      content: "Stunning view, John!",
+      createdAt: "2023-01-05T15:00:00Z"
+    },
+    {
+      id: "i8j7l809-2h0k-1j47-g69k-5l1k8i4m7l00",
+      authorId: "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11",
+      postId: "f5g4i576-9e7h-8g14-d36h-2i8h5f1j4i77",
+      content: "Looks incredible, Jane!",
+      createdAt: "2023-01-07T20:30:00Z"
+    }
+  ])
+  like_insertMany(data: [
+    {
+      userId: "b1f0e132-5a3d-4c70-9f2d-8e4d1b7f0e33",
+      postId: "d3e2g354-7c5f-6e92-b14f-0g6f3d9h2g55",
+      createdAt: "2023-01-05T14:45:00Z"
+    },
+    {
+      userId: "c2d1f243-6b4e-5d81-a03e-9f5e2c8g1f44",
+      postId: "d3e2g354-7c5f-6e92-b14f-0g6f3d9h2g55",
+      createdAt: "2023-01-05T14:50:00Z"
+    },
+    {
+      userId: "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11",
+      postId: "f5g4i576-9e7h-8g14-d36h-2i8h5f1j4i77",
+      createdAt: "2023-01-07T20:15:00Z"
+    }
+  ])
+  follow_insertMany(data: [
+    {
+      followerId: "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11",
+      followedId: "b1f0e132-5a3d-4c70-9f2d-8e4d1b7f0e33",
+      createdAt: "2023-01-03T13:00:00Z"
+    },
+    {
+      followerId: "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11",
+      followedId: "c2d1f243-6b4e-5d81-a03e-9f5e2c8g1f44",
+      createdAt: "2023-01-04T09:00:00Z"
+    }
+  ])
+}

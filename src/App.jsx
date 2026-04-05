@@ -1,46 +1,47 @@
-import "./App.css";
-import { onChildAdded, push, ref, set } from "firebase/database";
-import { database } from "./firebase";
-import { useState, useEffect } from "react";
-
-// Save the Firebase message folder name as a constant to avoid bugs due to misspelling
-const DB_MESSAGES_KEY = "messages";
+import React from "react";
+import { Routes, Route, Link } from "react-router-dom";
+import AuthForm from "./AuthForm";
+import NewsFeed from "./NewsFeed";
+import PostPage from "./PostPage";
+import ChatPage from "./ChatPage"; // ✅ ADD THIS
+import posts from "./posts";
+import "./styles.css";
 
 function App() {
-  const [messages, setMessages] = useState([]);
-
-  useEffect(() => {
-    const messagesRef = ref(database, DB_MESSAGES_KEY);
-    // onChildAdded will return data for every child at the reference and every subsequent new child
-    onChildAdded(messagesRef, (data) => {
-      // Add the subsequent child to local component state, initialising a new array to trigger re-render
-      setMessages((prevState) =>
-        // Store message key so we can use it as a key in our list items when rendering messages
-        [...prevState, { key: data.key, val: data.val() }]
-      );
-    });
-  }, []);
-
-  const writeData = () => {
-    const messageListRef = ref(database, DB_MESSAGES_KEY);
-    const newMessageRef = push(messageListRef);
-    set(newMessageRef, "abc");
-  };
-
-  // Convert messages in state to message JSX elements to render
-  let messageListItems = messages.map((message) => (
-    <li key={message.key}>{message.val}</li>
-  ));
-
   return (
-    <>
-      <h1>Instagram Bootcamp</h1>
-      <div className="card">
-        {/* TODO: Add input field and add text input as messages in Firebase */}
-        <button onClick={writeData}>Send</button>
-        <ol>{messageListItems}</ol>
-      </div>
-    </>
+    <div className="app">
+      <header className="app-header">
+        <h1 className="app-logo">Instagram Routes</h1>
+
+        <nav className="app-nav">
+          <Link to="/" className="app-link">
+            Home
+          </Link>
+
+          {/* ✅ NEW CHAT LINK */}
+          <Link to="/chat" className="app-link">
+            Chat
+          </Link>
+
+          <Link to="/authform" className="app-link">
+            Auth Form
+          </Link>
+        </nav>
+      </header>
+
+      <main className="app-main">
+        <Routes>
+          <Route path="/" element={<NewsFeed posts={posts} />} />
+
+          {/* ✅ NEW CHAT ROUTE */}
+          <Route path="/chat" element={<ChatPage />} />
+
+          <Route path="/authform" element={<AuthForm />} />
+
+          <Route path="/posts/:postId" element={<PostPage posts={posts} />} />
+        </Routes>
+      </main>
+    </div>
   );
 }
 

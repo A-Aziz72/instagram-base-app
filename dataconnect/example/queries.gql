@@ -1,0 +1,10 @@
+query GetUserProfile($id: UUID!) @auth(level: PUBLIC, insecureReason: "This operation is safe to expose to the public as it only retrieves public user profile information.") {
+  user(id: $id) {
+    id
+    username
+    displayName
+    profilePictureUrl
+    bio
+    createdAt
+  }
+}

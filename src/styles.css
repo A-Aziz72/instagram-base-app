@@ -1,0 +1,602 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #fafafa;
+  color: #222;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* App layout */
+.app {
+  min-height: 100vh;
+}
+
+.app-header {
+  background-color: white;
+  border-bottom: 1px solid #ddd;
+  padding: 16px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.app-logo {
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.app-nav {
+  display: flex;
+  gap: 20px;
+}
+
+.app-link {
+  color: #0095f6;
+  font-weight: 600;
+}
+
+.app-link:hover {
+  text-decoration: underline;
+}
+
+.app-main {
+  width: 100%;
+  padding: 30px 20px;
+}
+
+/* News Feed */
+.feed-container {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.feed-title {
+  font-size: 32px;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.feed-card {
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+
+.feed-username {
+  padding: 14px 16px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.feed-image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.feed-caption {
+  padding: 14px 16px;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.feed-link {
+  display: block;
+  padding: 0 16px 16px;
+  color: #0095f6;
+  font-weight: bold;
+}
+
+.feed-link:hover {
+  text-decoration: underline;
+}
+
+/* Auth Form */
+.auth-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding-top: 40px;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 380px;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 24px;
+}
+
+.auth-title {
+  text-align: center;
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.auth-input {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.auth-button {
+  padding: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: #0095f6;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.auth-button:hover {
+  background-color: #0077cc;
+}
+
+.auth-back {
+  margin-top: 16px;
+  text-align: center;
+}
+
+.auth-link {
+  color: #0095f6;
+  font-weight: 600;
+}
+
+.auth-link:hover {
+  text-decoration: underline;
+}
+
+/* Single Post Page */
+.postpage-container {
+  width: 100%;
+  padding: 20px;
+}
+
+.postpage-card {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.postpage-username {
+  padding: 14px 16px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.postpage-image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.postpage-caption {
+  padding: 14px 16px;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.postpage-link {
+  display: block;
+  padding: 0 16px 16px;
+  color: #0095f6;
+  font-weight: bold;
+}
+
+.postpage-link:hover {
+  text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .app-header {
+    padding: 14px 16px;
+  }
+
+  .app-logo {
+    font-size: 24px;
+  }
+
+  .app-nav {
+    gap: 14px;
+  }
+
+  .app-main {
+    padding: 20px 12px;
+  }
+
+  .feed-title {
+    font-size: 28px;
+  }
+
+  .auth-card {
+    max-width: 100%;
+  }
+
+  .postpage-container {
+    padding: 12px;
+  }
+}
+
+/* ===== NEWS FEED ===== */
+
+.feed-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.feed-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: #111827;
+}
+
+.feed-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+  transition: 0.2s ease;
+  text-align: left; /* important */
+}
+
+.feed-card:hover {
+  transform: translateY(-3px);
+}
+
+.feed-username {
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #111827;
+}
+
+.feed-image {
+  width: 100%;
+  border-radius: 12px;
+  margin-bottom: 10px;
+}
+
+.feed-caption {
+  color: #4b5563;
+  margin-bottom: 10px;
+}
+
+.feed-link {
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 8px;
+  background: #111827;
+  color: white;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: 0.2s ease;
+}
+
+.feed-link:hover {
+  background: #1f2937;
+}
+
+/* ===== APP LAYOUT ===== */
+
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.app-logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.app-nav {
+  display: flex;
+  gap: 10px;
+}
+
+.app-link {
+  padding: 8px 14px;
+  border-radius: 8px;
+  background: #f3f4f6;
+  color: #111827;
+  font-weight: 500;
+  transition: 0.2s ease;
+}
+
+.app-link:hover {
+  background: #e5e7eb;
+}
+
+/* ===== MAIN CONTENT ===== */
+
+.app-main {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ===== POSTS ===== */
+
+.post-card {
+  padding: 1.2rem;
+  border-radius: 14px;
+  background: white;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05);
+  transition: 0.2s ease;
+}
+
+.post-card:hover {
+  transform: translateY(-3px);
+}
+
+/* ===== CHAT ===== */
+
+.chat-card {
+  display: flex;
+  gap: 12px;
+  padding: 1rem;
+  border-radius: 14px;
+  background: white;
+  border: 1px solid #e5e7eb;
+}
+
+.chat-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #ddd;
+}
+
+/* ===== BACK BUTTON ===== */
+
+.back-button {
+  margin-bottom: 1rem;
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: #e5e7eb;
+  border: none;
+  cursor: pointer;
+}
+
+/* ===== ROOT ===== */
+
+#root {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+  text-align: left;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #1f2937;
+  background: linear-gradient(180deg, #fff7ed 0%, #fdf2f8 45%, #eef2ff 100%);
+  min-height: 100vh;
+}
+
+/* ===== HEADER ===== */
+
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding: 1rem 1.25rem;
+  background: linear-gradient(135deg, #7c3aed, #ec4899, #f97316);
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(124, 58, 237, 0.25);
+}
+
+.app-logo {
+  font-size: 1.7rem;
+  font-weight: 800;
+  color: white;
+}
+
+.app-nav {
+  display: flex;
+  gap: 12px;
+}
+
+.app-link {
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  font-weight: 700;
+  transition: 0.25s ease;
+  backdrop-filter: blur(6px);
+}
+
+.app-link:hover {
+  background: white;
+  color: #7c3aed;
+  transform: translateY(-2px);
+}
+
+/* ===== MAIN ===== */
+
+.app-main {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ===== FEED ===== */
+
+.feed-container {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.feed-title {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #7c3aed;
+  margin-bottom: 4px;
+}
+
+.feed-card {
+  background: linear-gradient(145deg, #ffffff, #fdf4ff);
+  border: 2px solid #f5d0fe;
+  border-radius: 22px;
+  padding: 18px;
+  box-shadow: 0 12px 28px rgba(236, 72, 153, 0.12);
+  transition: 0.25s ease;
+  text-align: left;
+}
+
+.feed-card:hover {
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: 0 18px 36px rgba(124, 58, 237, 0.18);
+}
+
+.feed-username {
+  font-weight: 800;
+  margin-bottom: 12px;
+  color: #db2777;
+  font-size: 1.05rem;
+}
+
+.feed-image {
+  width: 100%;
+  border-radius: 18px;
+  margin-bottom: 12px;
+  border: 3px solid #fde68a;
+  box-shadow: 0 8px 20px rgba(249, 115, 22, 0.15);
+}
+
+.feed-caption {
+  color: #374151;
+  margin-bottom: 14px;
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+.feed-link {
+  display: inline-block;
+  padding: 9px 14px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #8b5cf6, #ec4899);
+  color: white;
+  font-size: 0.9rem;
+  font-weight: 700;
+  transition: 0.25s ease;
+  box-shadow: 0 8px 18px rgba(139, 92, 246, 0.25);
+}
+
+.feed-link:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, #7c3aed, #db2777);
+}
+
+/* ===== GENERIC CARD ===== */
+
+.card {
+  padding: 1.8em;
+  margin: 1rem 0;
+  border-radius: 20px;
+  background: linear-gradient(145deg, #ffffff, #eff6ff);
+  border: 2px solid #bfdbfe;
+  box-shadow: 0 10px 24px rgba(59, 130, 246, 0.12);
+  transition: 0.25s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 30px rgba(59, 130, 246, 0.18);
+}
+
+/* ===== TEXT ===== */
+
+h1,
+h2,
+h3 {
+  color: #111827;
+}
+
+p {
+  color: #4b5563;
+  line-height: 1.6;
+}
+
+/* ===== BUTTONS ===== */
+
+button {
+  background: linear-gradient(135deg, #2563eb, #7c3aed);
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 700;
+  transition: 0.25s ease;
+  box-shadow: 0 8px 18px rgba(37, 99, 235, 0.2);
+}
+
+button:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, #1d4ed8, #6d28d9);
+}
+
+/* ===== LOGO ===== */
+
+.logo {
+  height: 5.5em;
+  padding: 1.2em;
+  will-change: transform, filter;
+  transition: all 0.3s ease;
+}
+
+.logo:hover {
+  transform: scale(1.08);
+  filter: drop-shadow(0 0 1.5em rgba(236, 72, 153, 0.45));
+}
+
+.logo.react:hover {
+  filter: drop-shadow(0 0 1.5em rgba(56, 189, 248, 0.6));
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 18s linear;
+  }
+}
