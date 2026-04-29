@@ -1,46 +1,77 @@
-import React from "react";
-import { Routes, Route, Link } from "react-router-dom";
-import AuthForm from "./AuthForm";
-import NewsFeed from "./NewsFeed";
-import PostPage from "./PostPage";
-import ChatPage from "./ChatPage"; // ✅ ADD THIS
-import posts from "./posts";
-import "./styles.css";
+import { useEffect, useState } from "react";
+import { ref, push, set, onValue } from "firebase/database";
+import { database } from "./firebase.jsx";
+import "./App.css";
 
 function App() {
+  const [message, setMessage] = useState("");
+  const [messages, setMessages] = useState([]);
+
+  useEffect(() => {
+    const messagesRef = ref(database, "messages");
+
+    const unsubscribe = onValue(messagesRef, (snapshot) => {
+      const data = snapshot.val();
+
+      if (data) {
+        const messagesArray = Object.keys(data).map((key) => ({
+          id: key,
+          text: data[key].text,
+          createdAt: data[key].createdAt,
+        }));
+
+        setMessages(messagesArray);
+      } else {
+        setMessages([]);
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  function sendMessage(event) {
+    event.preventDefault();
+
+    if (message.trim() === "") {
+      return;
+    }
+
+    const messagesRef = ref(database, "messages");
+    const newMessageRef = push(messagesRef);
+
+    set(newMessageRef, {
+      text: message,
+      createdAt: new Date().toISOString(),
+    });
+
+    setMessage("");
+  }
+
   return (
     <div className="app">
-      <header className="app-header">
-        <h1 className="app-logo">Instagram Routes</h1>
+      <div className="chat-box">
+        <h1>Tamkeengram Chat</h1>
 
-        <nav className="app-nav">
-          <Link to="/" className="app-link">
-            Home
-          </Link>
+        <div className="messages">
+          {messages.map((msg) => (
+            <div className="message" key={msg.id}>
+              <p>{msg.text}</p>
+              <span>{new Date(msg.createdAt).toLocaleString()}</span>
+            </div>
+          ))}
+        </div>
 
-          {/* ✅ NEW CHAT LINK */}
-          <Link to="/chat" className="app-link">
-            Chat
-          </Link>
+        <form onSubmit={sendMessage} className="form">
+          <input
+            type="text"
+            placeholder="Type a message..."
+            value={message}
+            onChange={(event) => setMessage(event.target.value)}
+          />
 
-          <Link to="/authform" className="app-link">
-            Auth Form
-          </Link>
-        </nav>
-      </header>
-
-      <main className="app-main">
-        <Routes>
-          <Route path="/" element={<NewsFeed posts={posts} />} />
-
-          {/* ✅ NEW CHAT ROUTE */}
-          <Route path="/chat" element={<ChatPage />} />
-
-          <Route path="/authform" element={<AuthForm />} />
-
-          <Route path="/posts/:postId" element={<PostPage posts={posts} />} />
-        </Routes>
-      </main>
+          <button type="submit">Send</button>
+        </form>
+      </div>
     </div>
   );
 }
